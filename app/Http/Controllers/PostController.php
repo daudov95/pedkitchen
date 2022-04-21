@@ -12,8 +12,9 @@ class PostController extends Controller
 
         $posts = new Post();
         // dd($posts->all());
+        $menu = ['Витрина', 'Педагогические ситуации и их решения', 'new', 'Мои избранные рецепты'];
 
-        return view('posts', ['posts' => $posts->all()]);
+        return view('posts', ['posts' => $posts->all(), 'menu' => $menu]);
     }
 
 
@@ -21,8 +22,9 @@ class PostController extends Controller
 
         // $post = new Post();
         // dd($post);
+        $menu = ['Витрина', 'Педагогические ситуации и их решения', 'new', 'Мои избранные рецепты'];
 
-        return view('post', ['post' => $post]);
+        return view('post', ['post' => $post, 'menu' => $menu]);
     }
 
 

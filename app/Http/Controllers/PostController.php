@@ -22,7 +22,7 @@ class PostController extends Controller
 
         // $post = new Post();
         // dd($post);
-        $menu = ['Витрина', 'Педагогические ситуации и их решения', 'new', 'Мои избранные рецепты'];
+        $menu = ['Витрина', 'Педагогические ситуации и их решения', 'new', 'new 2', 'Мои избранные рецепты'];
 
         return view('post', ['post' => $post, 'menu' => $menu]);
     }

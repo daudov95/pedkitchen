@@ -16,7 +16,38 @@
 			</div>
 		</div>
 
-		<section class="section section-block">
+		@if ($menu)
+
+			@foreach ($menu as $item)
+				<section class="section section-block {{ $loop->even ? 'section-block--reverse' : '' }}">
+					<div class="container">
+						<div class="section-block__wrap">
+
+							
+							<div class="section-block__left">
+								<h3 class="section-block__title">{{ $item->title }}</h3>
+
+								<div>{!! $item->content !!}</div>
+							
+
+								<div class="section-block-links">
+									<a href="{{ route('subscribe', ['category' => $item->id]) }}" class="section-block__link section-block__link-primary">Подписаться на обновления</a>
+									<a href="{{ route('posts', ['category' => $item->id]) }}" class="section-block__link">Перейти к рецептам <span>→</span></a>
+								</div>
+							</div>
+
+							<div class="section-block__right">
+								<img src="https://www.ispring.ru/ispring_content/content/images/products/ispring-market/home/ru/market-top-image-v2.webp" alt="screen">
+							</div>
+
+						</div>
+					</div>
+				</section>
+			@endforeach
+			
+		@endif
+
+		{{-- <section class="section section-block">
 			<div class="container">
 				<div class="section-block__wrap">
 
@@ -103,7 +134,7 @@
 
 				</div>
 			</div>
-		</section>
+		</section> --}}
 	</main>
 @endsection
 

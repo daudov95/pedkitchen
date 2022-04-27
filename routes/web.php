@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,16 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+Route::get('/', [MainController::class, 'pageView'])->name('index');
 
-Route::get('/posts', [PostController::class, 'allPosts'])->name('posts');
+Route::get('/posts/category/{category}', [PostController::class, 'allPosts'])->name('posts');
+Route::get('/posts/category/{category}/{subcategory}', [PostController::class, 'categoryPosts'])->name('posts.subcategory');
 
 Route::get('/post/{post}', [PostController::class, 'singlePost'])->name('post');
 
+Route::get('/subscribe/{category}', [SubscribeController::class, 'pageView'])->name('subscribe');
 
 
-Route::get('/subscribe', function () {
-    return view('subscribe');
-})->name('subscribe');
+// Profile
+Route::get('/profile/wishlist', [ProfileController::class, 'pageWishlist'])->name('wishlist');

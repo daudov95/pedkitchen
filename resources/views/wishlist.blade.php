@@ -14,7 +14,7 @@
 						@if (isset($category))
 							{{ $category->title }}
 						@else
-							Витрина
+							Избранные
 						@endif
 					</h2>
 				</div>
@@ -75,7 +75,7 @@
 
 				</div>
 
-				<div class="archive-pagonation">
+				{{-- <div class="archive-pagonation">
 
 					<div class="archive-pagonation__list">
 						<a href="#">«</a>
@@ -87,7 +87,7 @@
 						<a href="#">6</a>
 						<a href="#">»</a>
 					</div>
-				</div>
+				</div> --}}
 
 			</div>
 		</div>

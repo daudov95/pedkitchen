@@ -9,7 +9,7 @@
 				<div class="subscribe-form">
 					<input type="text" class="subscribe-form__input" placeholder="Ваше имя">
 					<input type="text" class="subscribe-form__input" placeholder="Email">
-					<input type="text" class="subscribe-form__input" placeholder="Телефон">
+					{{-- <input type="text" class="subscribe-form__input" placeholder="Телефон"> --}}
 					<label for="cb" class="subscribe-form__label">
 						<input type="checkbox" name="checkbox" id="cb" class="subscribe-form__checkbox">
 						Я согласен получать рассылки от сайта на электронную почту

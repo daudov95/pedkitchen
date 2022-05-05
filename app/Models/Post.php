@@ -13,4 +13,13 @@ class Post extends Model
     //     'title',
     //     'content',
     // ];
+
+    public function authors () {
+        return $this->belongsToMany(Author::class);
+    }
+
+    public function category () {
+        return $this->hasOne(PostCategory::class, 'id', 'category_id');
+    }
+
 }

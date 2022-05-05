@@ -17,7 +17,7 @@ class PostController extends Controller
         $posts = new Post();
         $submenu = Submenu::where('parent_id', $category)->get();
 
-        return view('posts', ['posts' => $posts->all(), 'menu' => $submenu]);
+        return view('posts', ['posts' => $posts->where('menu_id', $category)->take(6)->get(), 'menu' => $submenu, 'parentCategory' => $category]);
     }
 
     // Get category posts
@@ -26,29 +26,21 @@ class PostController extends Controller
         $posts = Post::where('category_id', $submenu)->get();
         $submenuList = Submenu::where('parent_id', $category)->get();
         $currentCategory = Submenu::where('id', $submenu)->where('parent_id', $category)->first();
-        // $menu = $submenu->where();
 
-        // dd($submenuList);
+        // dd($posts[0]->category->title);
 
-        return view('posts', ['posts' => $posts, 'menu' => $submenuList, 'category' => $currentCategory]);
+        return view('posts', ['posts' => $posts, 'menu' => $submenuList, 'category' => $currentCategory, 'parentCategory' => $category]);
     }
 
     // Get single post
-    public function singlePost (Post $post) {
+    public function singlePost ($menu, $submenu, $post) {
 
-        // $post = new Post();
-        // dd($post);
-
+        $post = Post::find($post);
         $category = PostCategory::where('id', $post->category_id)->first();
-        $author = Author::where('id', $post->author_id)->first();
+        $submenuList = Submenu::where('parent_id', $menu)->get();
+        // $currentCategory = Submenu::where('id', $submenu)->where('parent_id', $menu)->first();
 
-        // dd($author);
-
-        
-        // dd($menu->all());
-        // $menu = ['Витрина', 'Педагогические ситуации и их решения', 'new', 'new 2', 'Мои избранные рецепты'];
-
-        return view('post', ['post' => $post, 'category' => $category, 'author' => $author]);
+        return view('post', ['post' => $post, 'category' => $category, 'parentCategory' => $menu, 'menu' => $submenuList]); // 'author' => $author,
     }
 
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscribeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,10 +23,21 @@ Route::get('/', [MainController::class, 'pageView'])->name('index');
 Route::get('/posts/category/{category}', [PostController::class, 'allPosts'])->name('posts');
 Route::get('/posts/category/{category}/{subcategory}', [PostController::class, 'categoryPosts'])->name('posts.subcategory');
 
-Route::get('/post/{post}', [PostController::class, 'singlePost'])->name('post');
+Route::get('/post/category/{category}/{subcategory}/{post}', [PostController::class, 'singlePost'])->name('post');
+Route::get('/post/{post}', [PostController::class, 'singlePost'])->name('post.free');
 
 Route::get('/subscribe/{category}', [SubscribeController::class, 'pageView'])->name('subscribe');
 
 
 // Profile
-Route::get('/profile/wishlist', [ProfileController::class, 'pageWishlist'])->name('wishlist');
+
+Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => 'auth'], function () {
+    Route::get('/', [ProfileController::class, 'pageProfile'])->name('main');
+    Route::get('settings', [ProfileController::class, 'pageSettings'])->name('settings');
+    Route::get('wishlist', [ProfileController::class, 'pageWishlist'])->name('wishlist');
+});
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

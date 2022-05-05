@@ -53,6 +53,7 @@
 				<div class="archive-posts">
 
 					@if (isset($posts))
+						
 					
 						@foreach ($posts as $post)
 							<div class="archive-post">
@@ -60,11 +61,27 @@
 									<img src="{{ $post->image }}" alt="IMG">
 								</div>
 								<h4 class="archive-post__title">{{ $post->title }}</h4>
-								<span class="archive-post__category">Категория: общепедагогическая</span>
+								<span class="archive-post__category">Категория: {{ $post->category->title }}</span>
 
 								<div class="archive-post-button">
-									<span class="archive-post__author">Автор: Тамара Атаева</span>
-									<a href="{{ route('post', ['post' => $post->id] ) }}" class="archive-post__btn">Перейти</a>
+									<span class="archive-post__author"> 
+										
+										@if ($post->authors)
+
+											@if (count($post->authors) > 1)
+												Множество авторов
+											@elseif(count($post->authors) == 1)
+												@foreach ($post->authors as $key => $author)
+													Автор: {{$author->name}}
+												@endforeach
+											@else 
+												Автор: Не указан
+											@endif
+											
+										@endif
+										
+										</span>
+									<a href="{{ route('post', ['category'=> $parentCategory, 'subcategory' => 1, 'post' => $post->id] ) }}" class="archive-post__btn">Перейти</a>
 								</div>
 							</div>
 						@endforeach
@@ -75,7 +92,7 @@
 
 				</div>
 
-				<div class="archive-pagonation">
+				{{-- <div class="archive-pagonation">
 
 					<div class="archive-pagonation__list">
 						<a href="#">«</a>
@@ -87,7 +104,7 @@
 						<a href="#">6</a>
 						<a href="#">»</a>
 					</div>
-				</div>
+				</div> --}}
 
 			</div>
 		</div>

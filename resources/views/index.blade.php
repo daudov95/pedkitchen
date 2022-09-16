@@ -5,16 +5,90 @@
 	@include('parts.header')
 @endsection
 
+
+@section('styles')
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+@endsection
+
+
 @section('content')
 	<main class="main">
 		<div class="block-info">
 			<div class="container">
 				<div class="block-info__wrap">
-					<span class="block-info__text">Цифра + технологии = <span class="block-info__text--highlight">Педагогическая кухня учителя будущего</span></span>
+					<span class="block-info__text"><span class="block-info__text--highlight">Педагогическая кухня учителя будущего</span></span>
 					<a href="#" class="block-info__link">Подробнее</a>
 				</div>
 			</div>
 		</div>
+
+		{{-- <div class="banner">
+				<div class="banner__wrap">
+					<img src="assets/img/banners/banner.jpg" alt="Banner">
+				</div>
+			</div>
+		</div> --}}
+
+		<div class="banner">
+			<div class="container">
+
+				<div class="banner__wrap">
+					<!-- Slider main container -->
+					<div class="swiper swiper-banner">
+						<!-- Additional required wrapper -->
+						<div class="swiper-wrapper">
+						<!-- Slides -->
+
+						@if ($banners)
+							@foreach ($banners as $banner)
+
+								<div class="swiper-slide">
+									@if ($banner->link)
+										<a href="{{ $banner->link }}"><img src="{{ asset('storage/'.$banner->image) }}" alt="Banner"></a>
+									@else
+										<img src="{{ asset('storage/'.$banner->image) }}" alt="Banner">
+									@endif
+								</div>
+								
+							@endforeach
+							
+						@endif
+						
+	
+						</div>
+						<!-- If we need pagination -->
+						<div class="swiper-pagination"></div>
+					
+						<!-- If we need navigation buttons -->
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+
+		<style>
+			.banner {}
+			.banner__wrap {
+				margin-top: 50px;
+				/* height: 500px; */
+			}
+
+			/* .banner__wrap img {
+				height: 500px;
+			} */
+
+			.swiper-button-prev, .swiper-button-next {
+				display: none;
+			}
+		</style>
+
 
 		@if ($menu)
 
@@ -37,7 +111,7 @@
 							</div>
 
 							<div class="section-block__right">
-								<img src="https://www.ispring.ru/ispring_content/content/images/products/ispring-market/home/ru/market-top-image-v2.webp" alt="screen">
+								<img src="{{ asset('storage/'. $item->image) }}" alt="screen">
 							</div>
 
 						</div>
@@ -47,94 +121,6 @@
 			
 		@endif
 
-		{{-- <section class="section section-block">
-			<div class="container">
-				<div class="section-block__wrap">
-
-					
-					<div class="section-block__left">
-						<h3 class="section-block__title">Подбор педагогических рецептов</h3>
-
-						<span class="section-block__list-title">Педагогические ситуации и их решения:</span>
-						<ul class="section-block__list">
-							<li>по предмету</li>
-							<li>по классу</li>
-							<li>по уровню образования</li>
-							<li>по структуре занятия</li>
-							<li>по категориям обучающихся</li>
-						</ul>
-
-						<div class="section-block-links">
-							<a href="{{ route('subscribe') }}" class="section-block__link section-block__link-primary">Подписаться на обновления</a>
-							<a href="{{ route('posts') }}" class="section-block__link">Перейти к рецептам <span>→</span></a>
-						</div>
-					</div>
-
-					<div class="section-block__right">
-						<img src="https://www.ispring.ru/ispring_content/content/images/products/ispring-market/home/ru/market-top-image-v2.webp" alt="screen">
-					</div>
-
-				</div>
-			</div>
-		</section>
-		
-
-		<section class="section section-block section-block--reverse">
-			<div class="container">
-				<div class="section-block__wrap">
-
-					
-					<div class="section-block__left">
-						<h3 class="section-block__title">Авторские рецепты</h3>
-
-						<ul class="section-block__list">
-							<li>Педагогические методики</li>
-							<li>Педагогические технологии</li>
-							<li>Педагогические разработки</li>
-							<li>Комплекты наглядных материалов</li>
-						</ul>
-
-						<div class="section-block-links">
-							<a href="{{ route('subscribe') }}" class="section-block__link section-block__link-primary">Подписаться на обновления</a>
-							<a href="{{ route('posts') }}" class="section-block__link">Перейти к рецептам <span>→</span></a>
-						</div>
-					</div>
-
-					<div class="section-block__right">
-						<img src="https://www.ispring.ru/ispring_content/content/images/products/ispring-market/home/ru/market-top-image-v2.webp" alt="screen">
-					</div>
-
-				</div>
-			</div>
-		</section>
-
-		<section class="section section-block">
-			<div class="container">
-				<div class="section-block__wrap">
-
-					
-					<div class="section-block__left">
-						<h3 class="section-block__title">Блюда из ресторанов «MICHELIN»</h3>
-
-						<ul class="section-block__list">
-							<li>Интервью</li>
-							<li>Мастер-классы</li>
-							<li>Открытые уроки лауреатов и победителей конкурсов, опытных учителей</li>
-						</ul>
-
-						<div class="section-block-links">
-							<a href="{{ route('subscribe') }}" class="section-block__link section-block__link-primary">Подписаться на обновления</a>
-							<a href="{{ route('posts') }}" class="section-block__link">Перейти к рецептам <span>→</span></a>
-						</div>
-					</div>
-
-					<div class="section-block__right">
-						<img src="https://www.ispring.ru/ispring_content/content/images/products/ispring-market/home/ru/market-top-image-v2.webp" alt="screen">
-					</div>
-
-				</div>
-			</div>
-		</section> --}}
 	</main>
 @endsection
 
@@ -144,4 +130,26 @@
 
 @section('menu')
 	@include('parts.menu')
+@endsection
+
+@section('scripts')
+	<script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
+
+	<script>
+		const swiper = new Swiper('.swiper-banner', {
+			loop: true,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			effect: 'cube',
+			cubeEffect: {
+				slideShadows: false,
+			},
+			autoplay: {
+				delay: 5000,
+			},
+		});
+	</script>
+
 @endsection

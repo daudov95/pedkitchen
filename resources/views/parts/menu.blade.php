@@ -19,10 +19,24 @@
 
     <div class="mobile-menu__block">
         <h5 class="mobile-menu__title">Меню кухни</h5>
+        @if ($menu)
         <ul class="mobile-menu__list">
-            <li class="mobile-menu__item"><a href="#" class="mobile-menu__link">Подбор педагогических рецептов</a></li>
-            <li class="mobile-menu__item"><a href="#" class="mobile-menu__link">Авторские рецепты</a></li>
-            <li class="mobile-menu__item"><a href="#" class="mobile-menu__link">Блюда из ресторанов «MICHELIN»</a></li>
+			@foreach ($menu as $item)
+                <li class="mobile-menu__item"><a href="{{ route('posts', ['category' => $item->id]) }}" class="mobile-menu__link">{{ $item->title }}</a></li>
+            @endforeach
+        </ul>
+        @endif
+    </div>
+
+
+    <div class="mobile-menu__block" style="border-top: 1px solid white; padding-top: 10px;">
+        <ul class="mobile-menu__list">
+            <li class="mobile-menu__item"><a href="#" class="mobile-menu__link">Кухонный инвентарь</a></li>
+            <li class="mobile-menu__item"><a href="#" class="mobile-menu__link">Поваренные книги</a></li>
+            <li class="mobile-menu__item"><a href="#" class="mobile-menu__link">Еда с доставкой</a></li>
+            <li class="mobile-menu__item"><a href="#" class="mobile-menu__link">Праздничное меню</a></li>
         </ul>
     </div>
+
+
 </div>

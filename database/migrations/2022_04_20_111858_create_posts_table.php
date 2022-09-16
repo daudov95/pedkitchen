@@ -16,13 +16,18 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('situation');
-            $table->text('rate');
-            $table->text('prediction');
-            $table->text('solution');
             $table->string('image');
+            $table->integer('menu_id');
+            $table->integer('submenu_id');
             $table->integer('category_id');
-            $table->integer('author_id');
+            $table->text('tab1_title');
+            $table->text('tab1_desc');
+            $table->text('tab2_title');
+            $table->text('tab2_desc');
+            $table->text('tab3_title');
+            $table->text('tab3_desc');
+            $table->text('tab4_title');
+            $table->text('tab4_desc');
             $table->timestamps();
         });
     }

@@ -12,10 +12,10 @@
 
             <div class="header-menu">
                 <ul class="header-menu__list">
-                    <li class="header-menu__item"><a href="#" class="header-menu__link">О нашей кухне</a></li>
                     <li class="header-menu__item"><a href="#" class="header-menu__link">Задать вопрос</a></li>
                     <li class="header-menu__item"><a href="#" class="header-menu__link">Часто задаваемые вопросы</a></li>
                     <li class="header-menu__item"><a href="#" class="header-menu__link">Контакты</a></li>
+                    <li class="header-menu__item"><a href="{{ route('login') }}" class="header-menu__link">Личный кабинет</a></li>
                 </ul>
             </div>
         </div>

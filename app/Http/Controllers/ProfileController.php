@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Wishlist;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     //
 
-    public function pageWishlist () {
+    public function pageFavorites () {
 
         $posts = User::find(1)->posts;
         // $submenuList = Submenu::where('parent_id', $category)->get();
@@ -19,7 +19,7 @@ class ProfileController extends Controller
         // $submenu = Submenu::where('parent_id', $category)->get();
         // dd();
 
-        return view('wishlist', ['posts' => $posts, 'profile' => true]);
+        return view('favorites', ['posts' => $posts, 'profile' => true]);
     }
 
     public function pageProfile () {

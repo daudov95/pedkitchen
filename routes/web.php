@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\MainController as AdminMainController;
+use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +30,9 @@ Route::get('/post/{post}', [PostController::class, 'singlePostFree'])->name('pos
 
 Route::get('/subscribe/{category}', [SubscribeController::class, 'pageView'])->name('subscribe');
 Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe.post');
+
+Route::get('/contact-form', [ContactFormController::class, 'index'])->name('contactForm.page');
+Route::post('/contact-form', [ContactFormController::class, 'sendForm'])->name('contactForm.send');
 
 
 // Profile
@@ -123,6 +127,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::post('/update', [AdminMainController::class, 'bannerUpdate'])->name('update');
         Route::post('/delete', [AdminMainController::class, 'bannerRemove'])->name('delete');
     });
+
+    Route::group(['prefix' => 'contact', 'as' => 'contact.'], function() {
+        Route::get('/', [AdminMainController::class, 'contactPage'])->name('all');
+        Route::get('/mail/{id}', [AdminMainController::class, 'contactMailPage'])->name('mail');
+        Route::get('/mail/{id}/close', [AdminMainController::class, 'contactMailClose'])->name('close');
+        Route::post('/mail', [AdminMainController::class, 'contactMailStore'])->name('store');
+        Route::post('/delete', [AdminMainController::class, 'contactRemove'])->name('delete');
+    });
     
     Route::get('/authors', [AdminMainController::class, 'authorPage'])->name('authors');
     Route::get('/users', [AdminMainController::class, 'userPage'])->name('users');
@@ -138,3 +150,12 @@ Route::get('/likstorage', function () {
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');
 });
+
+Route::get('/clear', function() {    
+    Artisan::call('cache:clear');    
+    Artisan::call('config:cache');    
+    Artisan::call('config:clear');    
+    Artisan::call('view:clear');  
+    Artisan::call('route:clear');  
+    return "Кэш очищен.";}
+);

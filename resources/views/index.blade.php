@@ -19,7 +19,10 @@
 		<div class="block-info">
 			<div class="container">
 				<div class="block-info__wrap">
-					<span class="block-info__text"><span class="block-info__text--highlight">Педагогическая кухня учителя будущего</span></span>
+					<div style="display: flex; flex-direction: column;">
+						<span class="block-info__text"><span class="block-info__text--highlight">Педагогическая кухня учителя будущего</span></span>
+						<span style="margin-top: 10px">Здесь мы готовим учителей будущего</span>
+					</div>
 					<a href="#" class="block-info__link">Подробнее</a>
 				</div>
 			</div>

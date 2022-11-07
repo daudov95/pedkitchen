@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Panel</title>
+  <title>Админ панель</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -44,10 +44,19 @@
         <a href="{{ route('index') }}" class="nav-link">Главная</a>
       </li>
     </ul>
+    
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="{{ route('admin.contact.all') }}" aria-expanded="false">
+            <i class="far fa-comments"></i>
+            @if (isset($questions_count))
+              <span class="badge badge-danger navbar-badge">{{ $questions_count }}</span>
+            @endif
+          </a>
+        </li>
     </ul>
   </nav>
   <!-- /.navbar -->

@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC+3',
+    'timezone' => 'Europe/Moscow',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,6 +176,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+        * Custom Service Providers...
+        */
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 

@@ -76,6 +76,17 @@
 
 	</style> --}}
 
+
+	<style>
+		.archive-post__favorite {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			width: 20px !important;
+			height: 20px !important;
+		}
+	</style>
+
 	<main class="main archive__main">
 		
 		<div class="archive">
@@ -88,7 +99,7 @@
 						@if (isset($category))
 							{{ $category->title }}
 						@else
-							Витрина
+							Менюборд
 						@endif
 					</h2>
 					@if (auth()->check())
@@ -148,6 +159,7 @@
 							<div class="archive-post">
 								<div class="archive-post__img">
 									<img src="{{ asset('storage/'.$post->image) }}" alt="IMG">
+									<img src="{{ asset('assets/img/archive/icons/icon3.png') }}" alt="add to favorite" class="archive-post__favorite">
 								</div>
 								<h4 class="archive-post__title">{{ $post->title }}</h4>
 								<span class="archive-post__category">Категория: {{ $post->category_id ? $post->category->title : 'Не указано' }}</span>

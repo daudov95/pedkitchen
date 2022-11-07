@@ -55,14 +55,14 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>0</h3>
+              <h3>{{ $info['questions_count'] }}</h3>
 
-              <p>В разработке</p>
+              <p>Вопросы</p>
             </div>
             <div class="icon">
-              <i class="ion ion-pie-graph"></i>
+              <i class="ion ion-android-chat"></i>
             </div>
-            <a href="#" class="small-box-footer">Подробнее <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.contact.all') }}" class="small-box-footer">Подробнее <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

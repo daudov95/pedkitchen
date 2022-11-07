@@ -6,7 +6,7 @@
     @if(isset($menu))
         <ul class="archive-menu">
             <li class="archive-menu__item"><a href="{{ route('index') }}" class="archive-menu__link" style="background-image: url({{ asset('assets/img/archive/icons/icon-home.png') }})">Главная</a></li>
-            <li class="archive-menu__item"><a href="{{ route('posts', ['category' => $parentCategory]) }}" class="archive-menu__link {{ !isset($category) ? 'active' : '' }}" style="background-image: url({{ asset('assets/img/archive/icons/icon1.png') }})">Витрина</a></li>
+            <li class="archive-menu__item"><a href="{{ route('posts', ['category' => $parentCategory]) }}" class="archive-menu__link {{ !isset($category) ? 'active' : '' }}" style="background-image: url({{ asset('assets/img/archive/icons/icon1.png') }})">Менюборд</a></li>
 
             
 
@@ -28,7 +28,7 @@
     @include('parts.profile.menu')
     
     {{-- <ul class="archive-menu">
-        <li class="archive-menu__item"><a href="#" class="archive-menu__link archive--icon1 active2">Витрина</a></li>
+        <li class="archive-menu__item"><a href="#" class="archive-menu__link archive--icon1 active2">Менюборд</a></li>
         <li class="archive-menu__item"><a href="#" class="archive-menu__link archive--icon2">Педагогические ситуации и их решения</a></li>
         <li class="archive-menu__item"><a href="#" class="archive-menu__link archive--icon3">Мои избранные рецепты</a></li>
     </ul> --}}

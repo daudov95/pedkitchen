@@ -228,6 +228,36 @@
             </ul>
           </li>
 
+          {{-- <li class="nav-item {{ explode('.', request()->route()->getName())[1] == 'contact' ? 'menu-open' : '' }}">
+            <a href="{{ route('admin.contact.all') }}" class="nav-link {{ request()->routeIs('admin.contact.all') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Вопросы
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.contact.all') }}" class="nav-link">
+                  <i class="far fas fa-list nav-icon"></i>
+                  <p>Все вопросы</p>
+                </a>
+              </li>
+            </ul>
+          </li> --}}
+
+          <li class="nav-item">
+            <a href="{{ route('admin.contact.all') }}" class="nav-link {{ request()->routeIs('admin.contact.all') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>
+                Вопросы
+                
+                @if (isset($questions_count))
+                  <span class="badge badge-info right">{{ $questions_count }}</span>
+                @endif
+              </p>
+            </a>
+          </li>
           
           
         </ul>

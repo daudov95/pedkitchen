@@ -19,13 +19,16 @@ use App\Mail\Distribution as MailDistribution;
 use App\Models\Author;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\ContactForm;
 use App\Models\Distribution;
 use App\Models\Menu;
 use App\Models\Post;
+use App\Models\ReplyContact;
 use App\Models\Submenu;
 use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +37,7 @@ class MainController extends Controller
 {
     // Главная страница админки
     public function mainPage() {
-        $info = ['posts' => Post::count(), 'users' => User::count(), 'subscribers' => Subscriber::count()];
+        $info = ['posts' => Post::count(), 'users' => User::count(), 'subscribers' => Subscriber::count(), 'questions_count' => ContactForm::all()->count()];
 
         return view('admin.main', compact('info'));
     }
@@ -776,6 +779,72 @@ class MainController extends Controller
         ], 404);
     }
    
+
+    // Контакт форма
+    public function contactPage() {
+        $questions = ContactForm::orderBy('id', 'DESC')->Paginate(6);
+
+        return view('admin.pages.contact.form.form', compact('questions'));
+    }
+
+    public function contactMailPage($id) {
+        $question = ContactForm::findOrFail($id);
+
+        return view('admin.pages.contact.form.mail', compact('question'));
+    }
+
+    public function contactMailClose($id) {
+        $question = ContactForm::findOrFail($id);
+        $question->status = 1;
+        $question->save();
+
+        return redirect()->back();
+    }
+
+
+    public function contactMailStore(Request $request) {
+        
+        // if(!$request->menu) {
+        //     return redirect()->back()->with(['error'=> 'Выберите раздел']);
+        // }
+
+        // dd(Auth::id());
+
+        $user_id = Auth::id() ?? 1;
+
+        $menu = ContactForm::findOrFail($request->id)->replies()->create([
+            'user_id' => $user_id,
+            'message' => $request->message,
+            // 'question_id' => $user_id,
+        ]);
+        
+        
+        
+        
+
+        return redirect()->back();
+    }
+
+
+
+    public function contactRemove(Request $request) {
+
+        $contact = ContactForm::find($request->id);
+
+        if($contact) {
+            $contact->delete();
+            session()->flash('success', "Вопрос успешно удален!");
+
+            return response()->json([
+                'status' => true,
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => false,
+            'id' => $request->id
+        ], 404);
+    }
 
 
 

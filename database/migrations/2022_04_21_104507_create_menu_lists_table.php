@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menus_list', function (Blueprint $table) {
+        Schema::create('menu_lists', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content');

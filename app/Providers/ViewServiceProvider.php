@@ -6,7 +6,7 @@ use App\View\Composers\AdminNotificationsComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class ComposerServiceProvider extends ServiceProvider
+class ViewServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -27,6 +27,5 @@ class ComposerServiceProvider extends ServiceProvider
     {
         //
         View::composer(['admin.parts.header', 'admin.parts.sidebar'], AdminNotificationsComposer::class);
-        // view()->composer(['admin.parts.header', 'admin.parts.sidebar'], AdminNotificationsComposer::class);
     }
 }

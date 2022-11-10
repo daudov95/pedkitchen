@@ -37,6 +37,8 @@
             </div>
         @endif
 
+        @include('admin.parts.errors')
+
         <div class="card">
             <div class="card-header">
                 <h1 class="card-title"><span style="font-weight: bold;">[{{ $question->name }}]:</span> {{ $question->topic }}</h1>

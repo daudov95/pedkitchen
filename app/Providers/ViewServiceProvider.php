@@ -26,6 +26,6 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        View::composer(['admin.parts.header', 'admin.parts.sidebar'], AdminNotificationsComposer::class);
+        View::composer('admin.parts.sidebar', AdminNotificationsComposer::class);
     }
 }

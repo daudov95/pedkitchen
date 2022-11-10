@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Contact\StoreAnswerRequest;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\StoreCategoryRequest;
@@ -802,7 +803,7 @@ class MainController extends Controller
     }
 
 
-    public function contactMailStore(Request $request) {
+    public function contactMailStore(StoreAnswerRequest $request) {
         
         // if(!$request->menu) {
         //     return redirect()->back()->with(['error'=> 'Выберите раздел']);

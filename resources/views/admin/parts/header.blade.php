@@ -47,16 +47,9 @@
     
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    {{-- <ul class="navbar-nav ml-auto"> --}}
       <!-- Navbar Search -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" href="{{ route('admin.contact.all') }}" aria-expanded="false">
-            <i class="far fa-comments"></i>
-            @if (isset($questions_count))
-              <span class="badge badge-danger navbar-badge">{{ $questions_count }}</span>
-            @endif
-          </a>
-        </li>
-    </ul>
+        
+    {{-- </ul> --}}
   </nav>
   <!-- /.navbar -->

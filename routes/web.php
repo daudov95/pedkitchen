@@ -49,7 +49,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'isAdmin']], function() {
 
     Route::get('/', [AdminMainController::class, 'mainPage'])->name('main');
     Route::get('/categories', [AdminMainController::class, 'categoryPage'])->name('categories');

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="header__wrap">
             <div class="header-logo">
-                <a href="#" class="header-logo__link">ЧГПУ</a>
+                <a href="{{ route('index') }}" class="header-logo__link">ЧГПУ</a>
                 <div class="header-logo-text">
                     <h1>ПЕДАГОГИЧЕСКАЯ КУХНЯ</h1>
                     <h2>Чеченского государственного педагогического университета</h2>
@@ -13,7 +13,7 @@
             <div class="header-menu">
                 <ul class="header-menu__list">
                     <li class="header-menu__item"><a href="{{ route('contactForm.page') }}" class="header-menu__link">Задать вопрос</a></li>
-                    <li class="header-menu__item"><a href="#" class="header-menu__link">Часто задаваемые вопросы</a></li>
+                    <li class="header-menu__item"><a href="{{ route('faq.page') }}" class="header-menu__link">Часто задаваемые вопросы</a></li>
                     <li class="header-menu__item"><a href="#" class="header-menu__link">Контакты</a></li>
                     <li class="header-menu__item"><a href="{{ route('login') }}" class="header-menu__link">Личный кабинет</a></li>
                 </ul>
@@ -35,9 +35,9 @@
                     <li class="header-menu__item">
                         <a href="#" class="header-menu__link">Кухонный инвентарь</a>
                         <ul>
-                            <li><a href="#">Технопарк универсальных педагогических компетенций</a></li>
-                            <li><a href="#">Педагогический технопарк «Кванториум» имени профессора Ш. М-Х. Арсалиева</a></li>
-                            <li><a href="#">Центр продуктивного образования “Эковерситет”</a></li>
+                            <li><a href="https://chspu.ru/technopark/">Технопарк универсальных педагогических компетенций</a></li>
+                            <li><a href="https://chspu.ru/kvantorium/">Педагогический технопарк «Кванториум» имени профессора Ш. М-Х. Арсалиева</a></li>
+                            <li><a href="https://chspu.ru/центр-продуктивного-образования-эк/">Центр продуктивного образования “Эковерситет”</a></li>
                             <li><a href="#">Международная педагогическая мастерская победителей и лауреатов конкурсов «Учитель года» России, Беларуси и Казахстана</a></li>
                         </ul>
                     </li>

@@ -9,7 +9,7 @@ class ContactForm extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'message', 'topic'];
+    protected $fillable = ['name', 'email', 'message', 'topic', 'topic_select'];
 
 
     public function replies ()

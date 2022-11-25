@@ -48,6 +48,7 @@
 				</form>
 				<span class="subscribe__notice">Нажимая на кнопку «Отправить», вы принимаете</span>
 				<a href="#" class="subscribe__policy">Политику конфиденциальности и Лицензионное соглашение.</a>
+				<a href="{{ route('index') }}" class="subscribe__policy">Назад</a>
 			</div>
 			<div class="subscribe__right"></div>
 		</div>

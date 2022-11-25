@@ -82,8 +82,22 @@
 			position: absolute;
 			top: 10px;
 			right: 10px;
-			width: 20px !important;
-			height: 20px !important;
+			width: 30px !important;
+			height: 30px !important;
+			cursor: pointer;
+			opacity: 0;
+			transition: .3s opacity;
+		}
+
+		.archive-post__favorite img {
+			display: flex;
+			width: 20px;
+			height: 20px;
+			object-fit: contain;
+		}
+
+		.archive-post:hover .archive-post__favorite {
+			opacity: 1;
 		}
 	</style>
 
@@ -159,7 +173,9 @@
 							<div class="archive-post">
 								<div class="archive-post__img">
 									<img src="{{ asset('storage/'.$post->image) }}" alt="IMG">
-									<img src="{{ asset('assets/img/archive/icons/icon3.png') }}" alt="add to favorite" class="archive-post__favorite">
+									<button class="archive-post__favorite">
+										<img src="{{ asset('assets/img/archive/icons/icon3.png') }}" alt="add to favorite" >
+									</button>
 								</div>
 								<h4 class="archive-post__title">{{ $post->title }}</h4>
 								<span class="archive-post__category">Категория: {{ $post->category_id ? $post->category->title : 'Не указано' }}</span>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\MainController as AdminMainController;
 use App\Http\Controllers\ContactFormController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -34,6 +35,7 @@ Route::post('/subscribe', [SubscribeController::class, 'subscribe'])->name('subs
 Route::get('/contact-form', [ContactFormController::class, 'index'])->name('contactForm.page');
 Route::post('/contact-form', [ContactFormController::class, 'sendForm'])->name('contactForm.send');
 
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.page');
 
 // Profile
 
@@ -135,27 +137,30 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'i
         Route::post('/mail', [AdminMainController::class, 'contactMailStore'])->name('store');
         Route::post('/delete', [AdminMainController::class, 'contactRemove'])->name('delete');
     });
+
+
+    Route::group(['prefix' => 'faq', 'as' => 'faq.'], function() {
+        Route::get('/', [AdminMainController::class, 'faqPage'])->name('all');
+        Route::get('/create', [AdminMainController::class, 'faqCreatePage'])->name('create.page');
+        Route::post('/create', [AdminMainController::class, 'faqCreate'])->name('create');
+        Route::get('/edit/{id}', [AdminMainController::class, 'faqEditPage'])->name('edit');
+        Route::post('/update', [AdminMainController::class, 'faqUpdate'])->name('update');
+        Route::post('/delete', [AdminMainController::class, 'faqRemove'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'consultant', 'as' => 'consultant.'], function() {
+        Route::get('/', [AdminMainController::class, 'consultantPage'])->name('all');
+        Route::get('/create', [AdminMainController::class, 'consultantCreatePage'])->name('create.page');
+        Route::post('/create', [AdminMainController::class, 'consultantCreate'])->name('create');
+        Route::get('/edit/{id}', [AdminMainController::class, 'consultantEditPage'])->name('edit');
+        Route::post('/update', [AdminMainController::class, 'consultantUpdate'])->name('update');
+        Route::post('/delete', [AdminMainController::class, 'consultantRemove'])->name('delete');
+    });
+
+
     
     Route::get('/authors', [AdminMainController::class, 'authorPage'])->name('authors');
     Route::get('/users', [AdminMainController::class, 'userPage'])->name('users');
     Route::get('/subscribers', [AdminMainController::class, 'subscribePage'])->name('subscribers');
 
 });
-
-
-Route::get('/likstorage', function () {
-    Artisan::call('storage:link');
-});
-
-Route::get('/clear-cache', function() {
-    $exitCode = Artisan::call('cache:clear');
-});
-
-Route::get('/clear', function() {    
-    Artisan::call('cache:clear');    
-    Artisan::call('config:cache');    
-    Artisan::call('config:clear');    
-    Artisan::call('view:clear');  
-    Artisan::call('route:clear');  
-    return "Кэш очищен.";}
-);

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Consultant\StoreConsultantRequest;
+use App\Http\Requests\Consultant\UpdateConsultantRequest;
 use App\Http\Requests\Contact\StoreAnswerRequest;
+use App\Http\Requests\Faq\StoreFaqRequest;
+use App\Http\Requests\Faq\UpdateFaqRequest;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\StoreCategoryRequest;
@@ -20,8 +24,10 @@ use App\Mail\Distribution as MailDistribution;
 use App\Models\Author;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Consultant;
 use App\Models\ContactForm;
 use App\Models\Distribution;
+use App\Models\Faq;
 use App\Models\Menu;
 use App\Models\Post;
 use App\Models\ReplyContact;
@@ -805,12 +811,6 @@ class MainController extends Controller
 
     public function contactMailStore(StoreAnswerRequest $request) {
         
-        // if(!$request->menu) {
-        //     return redirect()->back()->with(['error'=> 'Выберите раздел']);
-        // }
-
-        // dd(Auth::id());
-
         $user_id = Auth::id() ?? 1;
 
         $menu = ContactForm::findOrFail($request->id)->replies()->create([
@@ -835,6 +835,130 @@ class MainController extends Controller
         if($contact) {
             $contact->delete();
             session()->flash('success', "Вопрос успешно удален!");
+
+            return response()->json([
+                'status' => true,
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => false,
+            'id' => $request->id
+        ], 404);
+    }
+
+
+    // FAQ
+    public function faqPage() {
+        $faqs = Faq::orderBy('id', 'DESC')->Paginate(6);
+
+        // dd($faqs);
+        return view('admin.pages.faq.index', compact('faqs'));
+    }
+
+    public function faqCreatePage() {
+        return view('admin.pages.faq.faqCreate');
+    }
+
+    public function faqCreate(StoreFaqRequest $request) {
+
+        Faq::create([
+            'title' => $request->title,
+            'desc' => $request->desc,
+        ]);
+
+        session()->flash('success', "Вопрос успешно создан!");
+
+        return redirect()->route('admin.faq.all');
+    }
+
+    public function faqEditPage($id) {
+        $faq = Faq::findOrFail($id);
+        
+        return view('admin.pages.faq.faqEdit', compact('faq'));
+    }
+
+    public function faqUpdate(UpdateFaqRequest $request) {
+        $faq = Faq::find($request->id);
+
+        $faq->update([
+            'title' => $request->title,
+            'desc' => $request->desc,
+        ]);
+
+        session()->flash('success', "Вопрос успешно обновлен!");
+
+        return redirect()->back();
+    }
+
+
+    public function faqRemove(Request $request) {
+
+        $faq = Faq::find($request->id);
+
+        if($faq) {
+            $faq->delete();
+            session()->flash('success', "Вопрос успешно удален!");
+
+            return response()->json([
+                'status' => true,
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => false,
+            'id' => $request->id
+        ], 404);
+    }
+
+
+    // Consultant
+    public function consultantPage() {
+        $consultants = Consultant::orderBy('id', 'DESC')->Paginate(6);
+
+        return view('admin.pages.consultant.index', compact('consultants'));
+    }
+
+    public function consultantEditPage($id) {
+        $consultant = Consultant::findOrFail($id);
+        
+        return view('admin.pages.consultant.consultantEdit', compact('consultant'));
+    }
+
+    public function consultantUpdate(UpdateConsultantRequest $request) {
+        $consultant = Consultant::find($request->id);
+
+        $consultant->update([
+            'name' => $request->name,
+        ]);
+
+        session()->flash('success', "Консультант успешно обновлен!");
+
+        return redirect()->back();
+    }
+
+    public function consultantCreatePage() {
+        return view('admin.pages.consultant.consultantCreate');
+    }
+
+    public function consultantCreate(StoreConsultantRequest $request) {
+
+        Consultant::create([
+            'name' => $request->name,
+        ]);
+
+        session()->flash('success', "Консультант успешно создан!");
+
+        return redirect()->route('admin.consultant.all');
+    }
+
+    public function consultantRemove(Request $request) {
+
+        $consultant = Consultant::find($request->id);
+
+        if($consultant) {
+            $consultant->delete();
+            session()->flash('success', "Консультант успешно удален!");
 
             return response()->json([
                 'status' => true,

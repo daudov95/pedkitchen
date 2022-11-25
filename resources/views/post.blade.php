@@ -121,38 +121,30 @@
 					<h1>{{ $post->title }}</h1>
 
 					<div class="tabs">
-						<div class="tab">
-							<input type="radio" id="tab1" name="tab-group" checked>
-							<label for="tab1" class="tab-title">{{ $post->tab1_title }}</label> 
-							<section class="tab-content">
-								{{ $post->tab1_desc }}
-							</section>
-						</div> 
-
-						<div class="tab">
-							<input type="radio" id="tab2" name="tab-group">
-							<label for="tab2" class="tab-title">{{ $post->tab2_title }}</label> 
-							<section class="tab-content">
-								{{ $post->tab2_desc }}
-							</section>
+						<ul class="container--tabs">
+							<li class="tab tab--active">{{ $post->tab1_title }}</li>
+							<li class="tab">{{ $post->tab2_title }}</li>
+							<li class="tab">{{ $post->tab3_title }}</li>
+							<li class="tab">{{ $post->tab4_title }}</li>
+						</ul>
+			
+						<div class="container--content">
+							<div class="content content--active">
+								<p>{{ $post->tab1_desc }}</p>
+							</div>
+							<div class="content">
+								<p>{{ $post->tab2_desc }}</p>
+							</div>
+							<div class="content">
+								<p>{{ $post->tab3_desc }}</p>
+							</div>
+							<div class="content">
+								<p>{{ $post->tab4_desc }}</p>
+							</div>
 						</div>
-
-						<div class="tab">
-							<input type="radio" id="tab3" name="tab-group">
-							<label for="tab3" class="tab-title">{{ $post->tab3_title }}</label> 
-							<section class="tab-content">
-								{{ $post->tab3_desc }}
-							</section> 
-						</div> 
-
-						<div class="tab">
-							<input type="radio" id="tab4" name="tab-group">
-							<label for="tab4" class="tab-title">{{ $post->tab4_title }}</label> 
-							<section class="tab-content">
-								{{ $post->tab4_desc }}
-							</section> 
-						</div> 
 					</div>
+
+					
 
 				</div>
 				
@@ -161,4 +153,37 @@
 		</div>
 
 	</main>
+
+@endsection
+
+@section('scripts')
+	<script>
+		// получаем массив всех вкладок
+		const tabs = document.querySelectorAll(".tab");
+		// получаем массив всех блоков с содержимым вкладок
+		const contents = document.querySelectorAll(".content");
+		
+		// запускаем цикл для каждой вкладки и добавляем на неё событие
+		for (let i = 0; i < tabs.length; i++) {
+			tabs[i].addEventListener("click", ( event ) => {
+		
+				// сначала нам нужно удалить активный класс именно с вкладок
+				let tabsChildren = event.target.parentElement.children;
+				for (let t = 0; t < tabsChildren.length; t++) {
+					tabsChildren[t].classList.remove("tab--active");
+				}
+				// добавляем активный класс
+				tabs[i].classList.add("tab--active");
+				// теперь нужно удалить активный класс с блоков содержимого вкладок
+				let tabContentChildren = event.target.parentElement.nextElementSibling.children;
+				for (let c = 0; c < tabContentChildren.length; c++) {
+					tabContentChildren[c].classList.remove("content--active");
+				}
+				// добавляем активный класс
+				contents[i].classList.add("content--active");
+		
+			});
+		}
+		
+	</script>
 @endsection

@@ -125,11 +125,11 @@
             </ul>
           </li>
 
-          <li class="nav-item {{ explode('.', request()->route()->getName())[1] == 'author' ? 'menu-open' : '' }}">
+          <li class="nav-item {{ explode('.', request()->route()->getName())[1] == 'author' ? 'menu-open' : '' }} {{ explode('.', request()->route()->getName())[1] == 'consultant' ? 'menu-open' : '' }}">
             <a href="{{ route('admin.author.all') }}" class="nav-link {{ request()->routeIs('admin.author.all') ? 'active' : '' }}">
               <i class="nav-icon fas fa-user"></i>
               <p>
-                Авторы
+                Авторы/Консультанты
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -141,9 +141,22 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('admin.consultant.all') }}" class="nav-link">
+                  <i class="far fas fa-list nav-icon"></i>
+                  <p>Все консультанты</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="{{ route('admin.author.create.page') }}" class="nav-link">
                   <i class="far fas fa-plus nav-icon"></i>
                   <p>Новый автор</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.consultant.create.page') }}" class="nav-link">
+                  <i class="far fas fa-plus nav-icon"></i>
+                  <p>Новый консультант</p>
                 </a>
               </li>
             </ul>
@@ -228,35 +241,41 @@
             </ul>
           </li>
 
-          {{-- <li class="nav-item {{ explode('.', request()->route()->getName())[1] == 'contact' ? 'menu-open' : '' }}">
-            <a href="{{ route('admin.contact.all') }}" class="nav-link {{ request()->routeIs('admin.contact.all') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-comments"></i>
-              <p>
-                Вопросы
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('admin.contact.all') }}" class="nav-link">
-                  <i class="far fas fa-list nav-icon"></i>
-                  <p>Все вопросы</p>
-                </a>
-              </li>
-            </ul>
-          </li> --}}
 
           <li class="nav-item">
             <a href="{{ route('admin.contact.all') }}" class="nav-link {{ request()->routeIs('admin.contact.all') ? 'active' : '' }}">
               <i class="nav-icon fas fa-comments"></i>
               <p>
                 Вопросы
-                
                 @if (isset($questions_count))
                   <span class="badge badge-info right">{{ $questions_count }}</span>
                 @endif
               </p>
             </a>
+          </li>
+
+          <li class="nav-item {{ explode('.', request()->route()->getName())[1] == 'faq' ? 'menu-open' : '' }}">
+            <a href="{{ route('admin.faq.all') }}" class="nav-link {{ request()->routeIs('admin.faq.all') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-question-circle"></i>
+              <p>
+                FAQ
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.faq.all') }}" class="nav-link">
+                  <i class="far fas fa-list nav-icon"></i>
+                  <p>Все вопросы</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.faq.create.page') }}" class="nav-link">
+                  <i class="far fas fa-plus nav-icon"></i>
+                  <p>Новый вопрос</p>
+                </a>
+              </li>
+            </ul>
           </li>
           
           

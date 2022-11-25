@@ -28,12 +28,6 @@
 			</div>
 		</div>
 
-		{{-- <div class="banner">
-				<div class="banner__wrap">
-					<img src="assets/img/banners/banner.jpg" alt="Banner">
-				</div>
-			</div>
-		</div> --}}
 
 		<div class="banner">
 			<div class="container">
@@ -74,23 +68,6 @@
 				</div>
 			</div>
 		</div>
-
-
-		<style>
-			.banner {}
-			.banner__wrap {
-				margin-top: 50px;
-				/* height: 500px; */
-			}
-
-			/* .banner__wrap img {
-				height: 500px;
-			} */
-
-			.swiper-button-prev, .swiper-button-next {
-				display: none;
-			}
-		</style>
 
 
 		@if ($menu)
